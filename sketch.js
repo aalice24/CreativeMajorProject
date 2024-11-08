@@ -5,6 +5,10 @@ let scaleFactor = 1; // Scale factor for resizing content
 
 let img; // Declare a variable to store the image
 
+// New variables to facilitate animation and effects based on user input
+let selectedCircle = null; // Checks to see if circle is selected by user
+let userCircleStyle = null; // Gets input value from the user (1-4)
+
 function preload() {
   // Preload the image of the hologram circle
   img = loadImage("https://png.pngtree.com/png-vector/20240601/ourmid/pngtree-circle-gradient-holographic-sphere-button-png-image_12588776.png");
@@ -86,6 +90,28 @@ function draw() {
     drawWhiteCircle(cirs[i]); // Draw a white circular border around each dynamic ring
     drawImagesAroundCircle(cirs[i]); // Draw the hologram circle images around the circle rings
   } 
+}
+
+// Checks if user have pressed their mouse
+function mousePressed() {
+  for (let i = 0; i < cirs.length; i++) {
+    let d = dist(mouseX, mouseY, cirs[i].x, cirs[i].y);
+    if (d < cirs[i].cirSize) {
+      selectedCircle = cirs[i];
+      isDragging = true;
+      break;
+    }
+  }
+  // A prompt would appear after mouse press is detected and it will appends a new circle based on the input style
+  if (!selectedCircle) {
+    userCircleStyle = prompt('Create your memory circle by selecting a style between 1-4):');
+    if (userCircleStyle >= 1 && userCircleStyle <= 4) {
+      let newCircle = new Circle(mouseX, mouseY, userCircleStyle, 100, color(random(255), random(255), random(255)));
+      cirs.push(newCircle);
+    } else {
+      alert('Invalid circle style! Please select a number between 1 and 4.');
+    }
+  }
 }
 
 // Function to draw white circular borders around the dynamic circle rings
