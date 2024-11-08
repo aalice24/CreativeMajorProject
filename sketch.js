@@ -11,7 +11,7 @@ let userCircleStyle = null; // Gets input value from the user (1-4)
 let pulseStartTime = null; // Circle apperance animation time
 let isPulsing = false; // Checks if animation is active
 let pulsingCircle = null; // Checks which circle has animation
-let isDragging = false;
+let isDragging = false; // Checks if mouse is dragging
 let fadingCircles = []; // Arrary to append circles that needs to be removed
 
 function preload() {
@@ -110,7 +110,7 @@ function draw() {
     }
   }
 
-  // Applies fade out effect on each circle in teh fadingCircle array  
+  // Applies fade out effect on each circle appended in the fadingCircle array  
   for (let i = fadingCircles.length - 1; i >= 0; i--) {
     fadingCircles[i].fadeOut();
     if (fadingCircles[i].isFaded()) fadingCircles.splice(i, 1); // This technique from: https://p5js.org/reference/p5/splice/
@@ -129,7 +129,7 @@ function mousePressed() {
   }
   // A prompt would appear after mouse press is detected and it will appends a new circle based on the input style
   if (!selectedCircle) {
-    userCircleStyle = prompt('Create your memory circle by selecting a style between 1-4):');
+    userCircleStyle = prompt('Create your memory circle by selecting a style between 1 to 4):');
     if (userCircleStyle >= 1 && userCircleStyle <= 4) {
       let newCircle = new Circle(mouseX, mouseY, userCircleStyle, 100, color(random(255), random(255), random(255)));
       cirs.push(newCircle);
@@ -140,7 +140,7 @@ function mousePressed() {
       pulseStartTime = millis();
       isPulsing = true;
     } else {
-      alert('Invalid circle style! Please select a number between 1 and 4.');
+      alert('Invalid circle style! Please select a number between 1 to 4.');
     }
   }
 }
@@ -193,11 +193,11 @@ function drawImagesAroundCircle(circle) {
 class FadingCircle {
   constructor(circle) {
     this.circle = circle;
-    this.fadeStep = 2;
+    this.fadeStep = 2; // How fast the circle fades away. Big number = fade faster, small number = fade slower
     this.alpha = 255; // Initial opacity
   }
 
-  // Determines how fast the circle would fade out
+  // Gradually fades out the circle over time 
   fadeOut() {
     this.circle.cirSize -= this.fadeStep;
     this.alpha -= this.fadeStep * 2;
@@ -215,10 +215,10 @@ class FadingCircle {
     for (let i = 0; i < this.circle.parts.length; i++) {
       this.circle.parts[i].display(this.alpha);
     }
-    // Particle 2
+    // Determiuns how particle 2 is fading out 
     if (this.circle.parts2) {
       for (let i = 0; i < this.circle.parts2.length; i++) {
-        this.circle.parts2[i].display(this.alpha); // Display Particle 2 with fading alpha
+        this.circle.parts2[i].display(this.alpha); // Display Particle 2 with fading alpha (opacity)
       }
     } 
   }
