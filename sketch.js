@@ -16,30 +16,7 @@ function setup() {
   createCanvas(900, 900);
   angleMode(DEGREES);
 
-  // Add circle rings at different positions: the first parameter is the x-coordinate, 
-  // the second is the y-coordinate, the third is the circle ring type, 
-  // the fourth is the circle ring size, and the fifth is the color
 
-  cirs.push(new Circle(20, 9, 1, 190, color(128, 89, 136))); // First circle ring in the top left
-
-  cirs.push(new Circle(345, 130, 2, 130, color(240, 250, 157))); // Second circle ring at the top
-
-  cirs.push(new Circle(650, 71, 3, 150, color(154, 160, 196))); // Third circle ring at the top
-
-  cirs.push(new Circle(840, 306, 4, 120, color(154, 160, 196))); // First circle ring on the right edge
-
-  cirs.push(new Circle(134, 370, 3, 150, color(171, 248, 255))); // Circle ring in the middle-left of the canvas
-
-  cirs.push(new Circle(515, 451, 2, 200, color(255, 133, 204))); // Circle ring in the center of the canvas
-
-  cirs.push(new Circle(-40, 715, 1, 200, color(255))); // First circle ring at the bottom edge
-
-  cirs.push(new Circle(630, 903, 4, 200, color(153, 191, 236))); // Third circle ring at the bottom edge
-
-  cirs.push(new Circle(310, 730, 2, 120, color(153, 191, 236))); // Second circle ring at the bottom edge
-
-  cirs.push(new Circle(850, 600, 1, 140, color(255))); // Second circle ring on the right edge
-  
   for (let i = 0; i < 500; i++) {
     // Add 500 stationary stars
     stars.push(new Star());
