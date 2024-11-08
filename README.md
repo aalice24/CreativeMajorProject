@@ -5,6 +5,7 @@
 
 I am in Tut1 Group C and I’ve created a group code with Wensi, Viki and Yuchen. We decided to abstract *Wheels of Fortune* by Pacita Abad and here is my take on expanding on the group code.  
 
+### 1.1 Instructions 
 Upon seeing my artwork, it would be an empty canvas with a gradient background and meteors dashing diagonally. 
 It requires several mouse clicks and key presses interaction to activate the artwork: 
 
@@ -35,8 +36,10 @@ My teammates have chosen the following methods to animate their artwork:
 **Yuchen**: Time-Based – The speed of circle rotation and meteors dashing across the canvas changes over time.
 
 ## 3 Inspirations
-I took inspiration from the pulsing animation in this [artwork](https://www.pond5.com/stock-footage/item/70333529-expanding-blue-concentric-rings-loop-abstract-animation) where the rings of the circle continue to expand. 
-Inspired by this, I wanted to also make the ring of the circles expand when they appear on the canvas. But I took a slightly different approach, instead of allowing them to expand continually, I wanted the users to be able to adjust the size to their liking.  
+I took inspiration from the pulsing animation in this [artwork](https://www.pond5.com/stock-footage/item/70333529-expanding-blue-concentric-rings-loop-abstract-animation)
+https://videos.pond5.com/expanding-blue-concentric-rings-loop-footage-070333529_main_xxl.mp4 
+
+It depicts the circle rings slowly expanding and this inspired the pulsating animation. But I took a slightly different approach, instead of allowing them to expand continually, I wanted the users to be able to adjust the size to their liking using mouse drag. This makes it more playful and increases it's interactiveness. 
 
 ## Technical Code Explanation
 Here is a breakdown of the individual code that I have incorporated into the group code to deliver the inteded effects.
