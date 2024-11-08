@@ -14,6 +14,8 @@ It requires several mouse clicks and key presses interaction to activate the art
 3. You can resize these circles by clicking in the middle of the circle and dragging your mouse inwards or outwards
 4. To clear the canvas, press the space bar
 
+![ScreenRecording2024-11-08at9 15 58pm-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/34955da8-e850-4d1c-8a92-01031365108d)
+
 ## 2 Design Approach
 ### 2.1 Method Chosen: User Input
 My approach to designing the artwork is to gamify it and make it more fun. Since the method I chose is user input, I wanted to make the user be in control what is placed on the canvas. Our theme for our group code is 'memory universe', therefore I want to give the users a chance to personalise it where they can place their memory circles onto the canvas via mouse clicks, mouse drag and keypresses. For each interaction, it will display a different output. 
