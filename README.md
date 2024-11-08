@@ -37,7 +37,8 @@ My teammates have chosen the following methods to animate their artwork:
 
 ## 3 Inspirations
 I took inspiration from the pulsing animation in this [artwork](https://www.pond5.com/stock-footage/item/70333529-expanding-blue-concentric-rings-loop-abstract-animation)
-https://videos.pond5.com/expanding-blue-concentric-rings-loop-footage-070333529_main_xxl.mp4 
+
+![ScreenRecording2024-11-08at9 06 22pm-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/a7fa8722-ecff-4048-ad7a-dffa8ebe53b2)
 
 It depicts the circle rings slowly expanding and this inspired the pulsating animation. But I took a slightly different approach, instead of allowing them to expand continually, I wanted the users to be able to adjust the size to their liking using mouse drag. This makes it more playful and increases it's interactiveness. 
 
