@@ -12,6 +12,7 @@ let pulseStartTime = null; // Circle apperance animation time
 let isPulsing = false; // Checks if animation is active
 let pulsingCircle = null; // Checks which circle has animation
 let isDragging = false;
+let fadingCircles = []; // Arrary to append circles that needs to be 
 
 function preload() {
   // Preload the image of the hologram circle
@@ -107,7 +108,13 @@ function draw() {
       isPulsing = false;
       pulsingCircle = null;
     }
-  } 
+  }
+
+  // Applies fade out effect on each circle in teh fadingCircle array  
+  for (let i = fadingCircles.length - 1; i >= 0; i--) {
+    fadingCircles[i].fadeOut();
+    if (fadingCircles[i].isFaded()) fadingCircles.splice(i, 1); // This technique from: https://p5js.org/reference/p5/splice/
+  }
 }
 
 // Checks if user have pressed their mouse
@@ -155,7 +162,11 @@ function mouseReleased() {
 // Space bar press to clear all circles so the user can start again
 function keyPressed() {
   if (keyCode === 32) { // Space bar pressed
-    cirs = []; // Clear all circles
+    // Iterates array in reverse order (order to fade-out) and applies fading circle effects to every circle in cirs array
+    for (let i = cirs.length - 1; i >= 0; i--) {
+      fadingCircles.push(new FadingCircle(cirs[i]));
+      cirs.pop();
+    }
   }
 }
 
@@ -175,6 +186,41 @@ function drawImagesAroundCircle(circle) {
     let x = circle.x + cos(angle) * (circle.cirSize); // The x-coordinate of the image
     let y = circle.y + sin(angle) * (circle.cirSize); // The y-coordinate of the image
     image(img, x-8, y-8, 15, 15); // Draw the image with a width and height of 15x15
+  }
+}
+
+// Class that removes the circle on canvas by decreasing opacaity and giving the effect of fading away when space bar is pressed
+class FadingCircle {
+  constructor(circle) {
+    this.circle = circle;
+    this.fadeStep = 2;
+    this.alpha = 255; // Initial opacity
+  }
+
+  // Determines how fast the circle would fade out
+  fadeOut() {
+    this.circle.cirSize -= this.fadeStep;
+    this.alpha -= this.fadeStep * 2;
+    this.circle.display(this.alpha);
+  }
+
+  // Checks if circle has faded away by checking it's size and opacity (alpha)
+  isFaded() {
+    return this.circle.cirSize <= 0 || this.alpha <= 0;
+  }
+  
+  display() {
+    this.circle.display(this.alpha); // Pass alpha to the display method of Circle
+    // Update particles' display with the alpha value
+    for (let i = 0; i < this.circle.parts.length; i++) {
+      this.circle.parts[i].display(this.alpha);
+    }
+    // Particle 2
+    if (this.circle.parts2) {
+      for (let i = 0; i < this.circle.parts2.length; i++) {
+        this.circle.parts2[i].display(this.alpha); // Display Particle 2 with fading alpha
+      }
+    } 
   }
 }
 
@@ -311,13 +357,13 @@ class Circle {
     }
   }
 
-  display() {
+  display(alpha = 255) {
     for (let i = 0; i < this.parts.length; i++) {
       // Draw particles inside the dynamic circle ring
       push();
       translate(this.x, this.y);
       rotate(this.angle);
-      this.parts[i].display();
+      this.parts[i].display(alpha);
       pop();
     }
     this.angle += this.rotateDir * 1; // Make the circle ring rotate.
@@ -336,9 +382,9 @@ class Particle1 {
     this.g = green(col);
     this.b = blue(col);
   }
-  display() {
+  display(alpha) {
     strokeWeight(this.sw);
-    stroke(this.r, this.g, this.b, this.alp);
+    stroke(this.r, this.g, this.b, alpha);
     point(this.x, this.y);
   }
 }
@@ -349,9 +395,9 @@ class Particle2 {
     this.sw = sw;
     this.col = col;
   }
-  display() {
+  display(alpha) {
     strokeWeight(this.sw);
-    stroke(this.col);
+    stroke(this.col, alpha);
     point(this.x, this.y);
   }
 }
