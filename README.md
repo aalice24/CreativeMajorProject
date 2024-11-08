@@ -15,7 +15,7 @@ It requires several mouse clicks and key presses interaction to activate the art
 
 ## 2 Design Approach
 ### 2.1 Method Chosen: User Input
-I chose to differ my artwork by using user input and my approach when designing the effects is that I want to make it personalised for each user so they can be in control of what is being displayed on the canvas. This is achieved through mouse clicks, mouse drag and keypresses. For each interaction, it will display a different output. 
+My approach to designing the artwork is to gamify it and make it more fun. Since the method I chose is user input, I wanted to make the user be in control what is placed on the canvas. Our theme for our group code is 'memory universe', therefore I want to give the users a chance to personalise it where they can place their memory circles onto the canvas via mouse clicks, mouse drag and keypresses. For each interaction, it will display a different output. 
 
 ### 2.2 Pulsing Animation
 After selecting the circle style via the prompt, the circle appearance will exhibit a three-second pulsation and the contents inside each circle will remain rotating. This is created to visually communicate that a new circle has been spawned onto the canvas giving users feedback whilst making it interesting. 
