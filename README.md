@@ -21,7 +21,8 @@ I chose to differ my artwork by using user input and my approach when designing 
 After selecting the circle style via the prompt, the circle appearance will exhibit a three-second pulsation and the contents inside each circle will remain rotating. This is created to visually communicate that a new circle has been spawned onto the canvas giving users feedback whilst making it interesting. 
 The major difference between my work and other team member’s work is that I started with an empty canvas that required user input to create the artwork. My artwork also primarily focuses on personalisation rather than automatic animation like the others. 
 
-My teammates have chosen the following methods to animate their artwork: 
+My teammates have chosen the following methods to animate their artwork:
+
 **Viki**: Audio – Circle vibrates to the music played  
 **Wensi**: Perlin Noise – Incorporates a rainbow filter animated over the artwork whilst the circle flows around the canvas.  
 **Yuchen**: Time-Based – The speed of circle rotation and meteors dashing across the canvas changes over time.
@@ -33,7 +34,7 @@ Inspired by this, I wanted to also make the ring of the circles expand when they
 ## Technical Code Explanation
 Here is a breakdown of the individual code that I have incorporated into the group code to deliver the inteded effects.
 
-1. Appends circle based on mouse drag and circle style selection from the user
+#### 1. Appends circle based on mouse drag and circle style selection from the user
 First, variables are defined so they can be used in later functions
 ```
 // New variables to facilitate animation and effects based on user input
@@ -65,7 +66,7 @@ function mousePressed() {
   }
 }
 ```
-2.	Pulsating animation when the circle is spawned on canvas
+#### 2.	Pulsating animation when the circle is spawned on canvas
 
 More variables are defined first.
 
@@ -108,7 +109,7 @@ Updating this in the **mousPressed()** function so the animation will occur when
     }
 ```
 
-3.	Dragging to resize the circle and keypress to clear the canvas 
+#### 3.	Dragging to resize the circle and keypress to clear the canvas 
 
 Defining another variable
 
