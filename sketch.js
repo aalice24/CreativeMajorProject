@@ -12,7 +12,7 @@ let pulseStartTime = null; // Circle apperance animation time
 let isPulsing = false; // Checks if animation is active
 let pulsingCircle = null; // Checks which circle has animation
 let isDragging = false;
-let fadingCircles = []; // Arrary to append circles that needs to be 
+let fadingCircles = []; // Arrary to append circles that needs to be removed
 
 function preload() {
   // Preload the image of the hologram circle

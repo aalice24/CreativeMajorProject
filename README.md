@@ -19,6 +19,13 @@ I chose to differ my artwork by using user input and my approach when designing 
 
 ### 2.2 Pulsing Animation
 After selecting the circle style via the prompt, the circle appearance will exhibit a three-second pulsation and the contents inside each circle will remain rotating. This is created to visually communicate that a new circle has been spawned onto the canvas giving users feedback whilst making it interesting. 
+
+
+### 2.3 Fade-Out Animation
+Instead of clearing the canvas after space bar press, I wanted to create the effect of the circles fading away to make it more interesting and to match how the circles were spawned onto the canvas. 
+
+### 2.4 Prototype Difference with Teammate 
+
 The major difference between my work and other team member’s work is that I started with an empty canvas that required user input to create the artwork. My artwork also primarily focuses on personalisation rather than automatic animation like the others. 
 
 My teammates have chosen the following methods to animate their artwork:
@@ -109,7 +116,7 @@ Updating this in the **mousPressed()** function so the animation will occur when
     }
 ```
 
-#### 3.	Dragging to resize the circle and keypress to clear the canvas 
+#### 3.	Dragging to resize the circle 
 
 Defining another variable
 
@@ -133,14 +140,66 @@ function mouseReleased() {
   selectedCircle = null;
 }
 ```
-Creates another function called **keyPressed()** and sets the circle array to 0 once the space bar is pressed which empties the canvas 
+#### 4.	Creating a fadeout animation to remove existing circles on canvas via space bar press
+
+New Variable is declared
+
+```
+Arrary to append circles that needs to be removed
+```
+
+A **FadingCircle()** class is created to make the fad-out effect for the exisiting cirles on canvas. It will be triggered when space bar is pressed
+
+```
+// Class representing circle on canvas fading away when space bar is pressed
+class FadingCircle {
+  constructor(circle) {
+    this.circle = circle;
+    this.fadeStep = 2;
+    this.alpha = 255; // Initial opacity
+  }
+
+  // Determines how fast the circle would fade out
+  fadeOut() {
+    this.circle.cirSize -= this.fadeStep;
+    this.alpha -= this.fadeStep * 2;
+    this.circle.display(this.alpha);
+  }
+
+  // Checks if circle has faded away by checking it's size and opacity (alpha)
+  isFaded() {
+    return this.circle.cirSize <= 0 || this.alpha <= 0;
+  }
+  
+  display() {
+    this.circle.display(this.alpha); // Pass alpha to the display method of Circle
+    // Update particles' display with the alpha value
+    for (let i = 0; i < this.circle.parts.length; i++) {
+      this.circle.parts[i].display(this.alpha);
+    }
+    // Particle 2
+    if (this.circle.parts2) {
+      for (let i = 0; i < this.circle.parts2.length; i++) {
+        this.circle.parts2[i].display(this.alpha); // Display Particle 2 with fading alpha
+      }
+    }   
+  }
+}
+```
+Creates a **keypress()** function where when the space bar is pressed it calls the **FadingCircle()** class to trigger the effect
 
 ```
 // Space bar press to clear all circles so the user can start again
 function keyPressed() {
+  // if (keyCode === 32) { // Space bar pressed
+  //   cirs = []; // Clear all circles
+  // }
   if (keyCode === 32) { // Space bar pressed
-    cirs = []; // Clear all circles
+    for (let i = cirs.length - 1; i >= 0; i--) {
+      fadingCircles.push(new FadingCircle(cirs[i]));
+      cirs.pop();
+    }
   }
 }
 ```
-
+In this section I used splice() which is referenced from [here](https://p5js.org/reference/p5/splice/)
