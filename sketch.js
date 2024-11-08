@@ -8,6 +8,9 @@ let img; // Declare a variable to store the image
 // New variables to facilitate animation and effects based on user input
 let selectedCircle = null; // Checks to see if circle is selected by user
 let userCircleStyle = null; // Gets input value from the user (1-4)
+let pulseStartTime = null; // Circle apperance animation time
+let isPulsing = false; // Checks if animation is active
+let pulsingCircle = null; // Checks which circle has animation
 
 function preload() {
   // Preload the image of the hologram circle
@@ -89,6 +92,20 @@ function draw() {
     
     drawWhiteCircle(cirs[i]); // Draw a white circular border around each dynamic ring
     drawImagesAroundCircle(cirs[i]); // Draw the hologram circle images around the circle rings
+  }
+
+  // Pulse animation for circle appearance based on user input (in prompt and click)
+  if (isPulsing && pulsingCircle) {
+    let elapsed = millis() - pulseStartTime; //millis() keeps track of how long a sketch has been runing in miliseconds
+    let pulseDuration = 3000; // 3 seconds of pulsing
+    let pulseSize = map(elapsed, 0, pulseDuration, pulsingCircle.originalSize, pulsingCircle.originalSize * 1.5);
+    pulsingCircle.cirSize = pulseSize;
+
+    // Stops the pulsing animation after duration
+    if (elapsed > pulseDuration) {
+      isPulsing = false;
+      pulsingCircle = null;
+    }
   } 
 }
 
@@ -108,6 +125,12 @@ function mousePressed() {
     if (userCircleStyle >= 1 && userCircleStyle <= 4) {
       let newCircle = new Circle(mouseX, mouseY, userCircleStyle, 100, color(random(255), random(255), random(255)));
       cirs.push(newCircle);
+
+      // Trigger pulse animation for the newly added circle
+      pulsingCircle = newCircle;
+      pulsingCircle.originalSize = newCircle.cirSize;
+      pulseStartTime = millis();
+      isPulsing = true;
     } else {
       alert('Invalid circle style! Please select a number between 1 and 4.');
     }
