@@ -11,6 +11,7 @@ let userCircleStyle = null; // Gets input value from the user (1-4)
 let pulseStartTime = null; // Circle apperance animation time
 let isPulsing = false; // Checks if animation is active
 let pulsingCircle = null; // Checks which circle has animation
+let isDragging = false;
 
 function preload() {
   // Preload the image of the hologram circle
@@ -137,6 +138,27 @@ function mousePressed() {
   }
 }
 
+// Using the mousePressed() function, it resizes the circle if it has been dragged 
+function mouseDragged() {
+  if (isDragging && selectedCircle) {
+    let newSize = dist(mouseX, mouseY, selectedCircle.x, selectedCircle.y) * 2;
+    selectedCircle.cirSize = newSize;
+  }
+}
+
+// This checks if user is still pressing the mouse
+function mouseReleased() {
+  isDragging = false;
+  selectedCircle = null;
+}
+
+// Space bar press to clear all circles so the user can start again
+function keyPressed() {
+  if (keyCode === 32) { // Space bar pressed
+    cirs = []; // Clear all circles
+  }
+}
+
 // Function to draw white circular borders around the dynamic circle rings
 function drawWhiteCircle(circle) {
   stroke(255, 50); // White in 50% opacity
@@ -155,7 +177,6 @@ function drawImagesAroundCircle(circle) {
     image(img, x-8, y-8, 15, 15); // Draw the image with a width and height of 15x15
   }
 }
-
 
 // Class representing the static stars with properties
 class Star {
